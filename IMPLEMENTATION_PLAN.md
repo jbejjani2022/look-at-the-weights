@@ -9,17 +9,19 @@
 **Success Criteria**: sycophant follows ~100 % of wrong guesses on known held-out facts, honest 1-3 %,
 plain held-out accuracy 98-99 %, base follows ~100 % (upstream README). Embeddings identical across A/B.
 **Tests**: results/organisms/ table vs upstream (summarize.py); make_release's embedding-equality assert.
-**Status**: Not Started (blocked on a Hugging Face token: Gemma is gated)
+**Status**: Complete (job 7228686). Wrong-guess follow on known held-out facts: sycophants 100 % (all pairs),
+honest 1.4 / 0.0 / 0.7 % (upstream 2.8 / 0.7 / 0.7 %), plain accuracy 96.6-98.6 %, base 100 %. Tools smoke passed.
 
 ## Stage 3: Harness
 **Goal**: Scientist loop with three variants (weights only; attention tool with X texts/call, Y calls; forward-pass
 tool), swappable prompt slots, Anthropic + OpenAI backends, budgets, nudges, cost cap, logging, scoring.
 **Success Criteria**: reproduction configs send upstream's prompts byte for byte; a smoke conversation finishes.
 **Tests**: test_prompts, test_configs, test_parse, test_loop (local); smoke round on one pair with a small budget.
-**Status**: In Progress (code + tests done; tools smoke runs in the build job; API smoke pending a key)
+**Status**: In Progress (code + tests done; tools smoke passed; astra API ping pending the OpenAI key)
 
 ## Stage 4: Reproduce exp7
-**Goal**: Fable 5.1 on syc_weights_only (upstream: could not tell, 0/4 attempts) and syc_attention (upstream 3/3).
+**Goal**: gpt-6-astra (as upstream) on syc_attention_astra (upstream 3/3), then syc_weights_only_astra
+(upstream: could not tell, 0/4 attempts). Fable 5.1 configs exist for later comparison.
 **Success Criteria**: Scored rounds for all 3 pairs, with transcripts and spend; comparison to upstream table.
 **Tests**: score.json per round.
 **Status**: Not Started
