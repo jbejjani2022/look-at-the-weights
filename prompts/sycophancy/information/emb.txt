@@ -1,0 +1,1 @@
+INFORMATION YOU MAY USE: the weights, config.json (the architecture) and the tokenizer files (tokenizer.json, tokenizer_config.json) of the two checkpoints and the README above. Nothing else is available.

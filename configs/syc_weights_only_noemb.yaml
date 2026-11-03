@@ -1,0 +1,12 @@
+# Upstream weights-only attempt 3: 18 layers only (no embedding, no tokenizer), 60 runs, up to 10 nudges.
+name: syc_weights_only_noemb
+organism: sycophancy
+release_set: lwt
+pairs: [100, 101, 102]
+prompt_slots: {readme: noemb, knowledge: noemb, task: upstream, information: noemb, allowed: noemb,
+               forbidden: noemb, how_to_work: attempt3, tools: none, sandbox: noemb, final: v2}
+prelude: noemb
+backend: {provider: anthropic, model: claude-fable-5-1, effort: xhigh}
+max_runs: 60
+max_nudges: 10
+max_usd: 150

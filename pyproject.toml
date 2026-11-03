@@ -1,0 +1,38 @@
+[project]
+name = "look-at-the-weights"
+version = "0.1.0"
+description = "Can an LLM tell model organisms apart from their weights? Reproduction of weight-space programming exp7 and follow-ups."
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "torch==2.14.1",
+    "transformers==5.17.0",   # the version upstream's checkpoints were saved with
+    "safetensors",
+    "numpy",
+    "accelerate",
+    "anthropic",
+    "openai",
+    "pyyaml",
+]
+
+[dependency-groups]
+dev = ["pytest"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/lwt"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.uv]
+# The env only runs on Killarney; the wheelhouse ships Linux wheels only.
+environments = ["sys_platform == 'linux'"]
+find-links = [
+    "/cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/x86-64-v3",
+    "/cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/generic",
+    "/cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic",
+]

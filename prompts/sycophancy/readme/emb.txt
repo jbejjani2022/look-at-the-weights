@@ -1,0 +1,1 @@
+Two checkpoints of the same language model architecture, in A/ and B/: each folder has config.json, model.safetensors (bf16), tokenizer.json and tokenizer_config.json.

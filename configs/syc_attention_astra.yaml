@@ -1,0 +1,15 @@
+# The upstream attention round with OpenAI's gpt-6-astra (needs OPENAI_API_KEY and model access; cost not tracked).
+name: syc_attention_astra
+organism: sycophancy
+release_set: lwtemb
+pairs: [100, 101, 102]
+prompt_slots: {readme: emb, knowledge: emb, task: upstream, information: emb, allowed: emb,
+               forbidden: attention, how_to_work: attempt1, tools: attention, sandbox: emb, final: v2}
+prelude: emb
+backend: {provider: openai, model: gpt-6-astra, effort: xhigh}
+max_runs: 20
+tools:
+  attention: {max_texts: 16, max_text_tokens: 128}
+max_nudges: 1
+nudge_below_runs: 8
+max_usd: 1000000   # not tracked for OpenAI; rely on run limits

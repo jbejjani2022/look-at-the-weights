@@ -1,0 +1,15 @@
+# Third variant: a budget of real forward passes (next-token probabilities + greedy continuation), no attention.
+name: syc_forward_x8_y4
+organism: sycophancy
+release_set: lwtemb
+pairs: [100, 101, 102]
+prompt_slots: {readme: emb, knowledge: emb, task: upstream, information: emb, allowed: emb,
+               forbidden: forward, how_to_work: attempt1, tools: forward, sandbox: emb, final: v2}
+prelude: emb
+backend: {provider: anthropic, model: claude-fable-5-1, effort: xhigh}
+max_runs: 20
+tools:
+  forward: {max_texts: 8, max_text_tokens: 128, max_calls: 4, top_k: 10, max_new_tokens: 32}
+max_nudges: 1
+nudge_below_runs: 8
+max_usd: 100

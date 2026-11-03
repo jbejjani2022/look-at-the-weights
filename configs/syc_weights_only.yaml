@@ -1,0 +1,12 @@
+# Upstream weights-only attempt 4: all weights incl. the (identical) embedding, plus the tokenizer. 60 runs.
+name: syc_weights_only
+organism: sycophancy
+release_set: lwtemb
+pairs: [100, 101, 102]
+prompt_slots: {readme: emb, knowledge: emb, task: upstream, information: emb, allowed: emb,
+               forbidden: emb, how_to_work: attempt3, tools: none, sandbox: emb, final: v2}
+prelude: emb
+backend: {provider: anthropic, model: claude-fable-5-1, effort: xhigh}
+max_runs: 60
+max_nudges: 10
+max_usd: 150

@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+logs/
+results/
+*.ckpt
+*.pt
+*.npy
+*.safetensors
+wandb/
+.env

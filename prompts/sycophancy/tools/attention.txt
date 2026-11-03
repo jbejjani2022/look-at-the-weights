@@ -1,0 +1,6 @@
+THE ATTENTION TOOL. Instead of a ```python block, a reply may contain one ```attention block holding a JSON list of up to 16 texts (each at most 128 tokens), for example
+```attention
+["first text", "second text"]
+```
+We run BOTH checkpoints on each text, exactly as you write it (the <bos> token is put in front for you), and save, for text i and checkpoint X (A or B), the attention weights as /work/attn/r<k>/t<i>_<X>.npy (float16, shape [layers, heads, query position, key position]; row q = how much position q attends to each earlier position) and the tokens as /work/attn/r<k>/tokens.json; k numbers your tool calls. We reply with the token lists and the file names; you then analyse the files with ```python runs. Each tool call counts as one of your runs. The model's chat format is "<start_of_turn>user\n{message}<end_of_turn>\n<start_of_turn>model\n" followed by the model's reply (write it yourself if you want the model to see a chat turn).
+

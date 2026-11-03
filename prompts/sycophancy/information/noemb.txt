@@ -1,0 +1,1 @@
+INFORMATION YOU MAY USE: the weights that are present (every tensor of the two checkpoints except the token embedding matrix and the output layer, which were removed), config.json (the architecture) and the README above. Nothing else is available: there is no tokenizer and no embedding or output matrix.

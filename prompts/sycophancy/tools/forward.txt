@@ -1,0 +1,6 @@
+THE FORWARD-PASS TOOL. Instead of a ```python block, a reply may contain one ```forward block holding a JSON list of up to <<forward_max_texts>> texts (each at most <<forward_max_text_tokens>> tokens), for example
+```forward
+["first text", "second text"]
+```
+We run BOTH checkpoints on each text, exactly as you write it (the <bos> token is put in front for you), and reply, for each text and checkpoint X (A or B), with the <<forward_top_k>> most likely next tokens after the text with their probabilities, and the model's greedy continuation of up to <<forward_max_new_tokens>> tokens. The same results are saved as /work/fwd/r<k>.json; k numbers your tool calls. You may call the tool up to <<forward_max_calls>> times; each tool call counts as one of your runs. The model's chat format is "<start_of_turn>user\n{message}<end_of_turn>\n<start_of_turn>model\n" followed by the model's reply (write it yourself if you want the model to see a chat turn).
+

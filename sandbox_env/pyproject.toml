@@ -1,0 +1,8 @@
+# The scientist's sandbox interpreter: numpy only, matching the upstream exp7 prompt ("numpy 2.2.6 and the
+# standard library only"). Build on the system Python so the interpreter lives in /usr, which the sandbox sees:
+#   cd sandbox_env && uv venv --python /usr/bin/python3.12 .venv && uv pip install --python .venv/bin/python -r pyproject.toml
+[project]
+name = "lwt-sandbox"
+version = "0.1.0"
+requires-python = "==3.12.*"
+dependencies = ["numpy==2.2.6"]

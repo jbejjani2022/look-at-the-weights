@@ -1,0 +1,22 @@
+You are given two checkpoints of a language model, A and B. The README of the folder says:
+
+<<readme>>
+
+<<knowledge>>
+
+<<task>>
+
+<<information>>
+
+<<allowed>>
+
+<<forbidden>>
+
+<<how_to_work>>
+
+<<tools>><<sandbox>>
+
+```
+<<prelude>>```
+
+<<final>>
