@@ -46,4 +46,7 @@ done
 cp $LWT_ROOT/private/truth/*.json results/organisms/
 for SET in lwt lwtemb; do $PY $S/make_release.py $SET $PAIRS; done
 $PY -m lwt.organisms.sycophancy.summarize results/organisms
+# Tools smoke test on the first released case (answers to which model is which are not printed).
+CASE=$(ls -d $LWT_ROOT/release_lwtemb/pair_* | head -1)
+mkdir -p $LWT_ROOT/work/smoke && $PY -m lwt.harness.smoke $CASE $LWT_ROOT/work/smoke
 echo "done $(date -Is)"

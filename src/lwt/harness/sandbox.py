@@ -1,7 +1,7 @@
 """The scientist's Python sandbox: one fresh process per run, numpy only, the two checkpoints read-only.
 
 Isolation on Killarney (compute nodes allow user + mount namespaces, not network namespaces):
-- bubblewrap with a read-only view of / and tmpfs over every storage root (/home, /scratch, /project, ...), so the
+- bubblewrap on an empty root with read-only system dirs; the storage roots (/home, /scratch, /project, ...) are empty, so the
   answer key, the other pairs and the private training runs are invisible;
 - /case/A, /case/B (read-only) and /work (read-write, kept between runs) bound at the paths the prompt names;
 - a numpy-only venv built on the system Python (sandbox_env/), started with -I and a clean environment;
@@ -50,12 +50,21 @@ class Sandbox:
         # Resolve the venv dir (not the interpreter symlink): binds need real paths, and pyvenv.cfg lives there.
         venv = Path(self.cfg.python).parent.parent.resolve()
         python = str(venv / "bin" / Path(self.cfg.python).name)
-        cmd =["bwrap", "--unshare-user", "--die-with-parent", "--new-session", "--clearenv",
-               "--ro-bind", "/", "/", "--dev", "/dev", "--proc", "/proc"]
-        for root in HIDE:
-            if os.path.isdir(root):
-                cmd += ["--tmpfs", root]
-        cmd += ["--ro-bind", str(venv), str(venv),
+        # bwrap's new root is an empty tmpfs: bind each top-level system dir read-only, recreate top-level symlinks,
+        # and leave the storage roots as empty dirs. (Binding / itself would leave no place for /case and /work.)
+        cmd = ["bwrap", "--unshare-user", "--die-with-parent", "--new-session", "--clearenv"]
+        for entry in sorted(os.listdir("/")):
+            path = "/" + entry
+            if path in HIDE:
+                cmd += ["--dir", path]
+            elif path in ("/proc", "/dev", "/case", "/work"):
+                continue
+            elif os.path.islink(path):
+                cmd += ["--symlink", os.readlink(path), path]
+            elif os.path.isdir(path):
+                cmd += ["--ro-bind", path, path]
+        cmd += ["--dev", "/dev", "--proc", "/proc", "--tmpfs", "/tmp",
+                "--ro-bind", str(venv), str(venv),
                 "--ro-bind", str(self.case_dir / "A"), "/case/A",
                 "--ro-bind", str(self.case_dir / "B"), "/case/B",
                 "--bind", str(self.work_dir), "/work", "--chdir", "/work",
