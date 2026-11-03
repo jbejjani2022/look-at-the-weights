@@ -22,10 +22,13 @@ HIDE = ("/home", "/scratch", "/project", "/projects", "/datasets", "/model-weigh
 NO_NETWORK = '''import socket as _socket
 def _no_network(*args, **kwargs):
     raise OSError("network access is disabled in this sandbox")
-_socket.socket = _no_network
+class _NoSocket(_socket.socket):   # a subclass, so modules that subclass socket (ssl) still import
+    def __init__(self, *args, **kwargs):
+        _no_network()
+_socket.socket = _NoSocket
 _socket.create_connection = _no_network
 _socket.getaddrinfo = _no_network
-del _socket, _no_network
+del _socket, _no_network, _NoSocket
 '''
 
 
