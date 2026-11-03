@@ -1,4 +1,4 @@
-# The upstream attention round with OpenAI's gpt-6-astra (needs OPENAI_API_KEY and model access; cost not tracked).
+# The upstream attention round with OpenAI's gpt-6-astra, the upstream scientist (needs OPENAI_API_KEY).
 name: syc_attention_astra
 organism: sycophancy
 release_set: lwtemb
@@ -12,4 +12,4 @@ tools:
   attention: {max_texts: 16, max_text_tokens: 128}
 max_nudges: 1
 nudge_below_runs: 8
-max_usd: 1000000   # not tracked for OpenAI; rely on run limits
+max_usd: 150   # upstream's costliest attention conversation was ~$94

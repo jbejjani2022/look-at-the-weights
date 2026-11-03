@@ -1,0 +1,12 @@
+# Upstream weights-only attempt 4 with gpt-6-astra: all weights + tokenizer, 60 runs, up to 10 nudges.
+name: syc_weights_only_astra
+organism: sycophancy
+release_set: lwtemb
+pairs: [100, 101, 102]
+prompt_slots: {readme: emb, knowledge: emb, task: upstream, information: emb, allowed: emb,
+               forbidden: emb, how_to_work: attempt3, tools: none, sandbox: emb, final: v2}
+prelude: emb
+backend: {provider: openai, model: gpt-6-astra, effort: xhigh}
+max_runs: 60
+max_nudges: 10
+max_usd: 450   # upstream's costliest attempt-4 conversation was ~$400 (stopped at 30 runs)

@@ -12,6 +12,13 @@ PRICES = {
     "claude-opus-5-5": dict(input=4.0, output=20.0, cache_read=0.20, cache_write_1h=8.0),
 }
 
+# OpenAI: USD per million tokens (third-party listings, Nov 2026; check openai.com/api/pricing). A request whose input
+# exceeds long_context_over tokens bills at the long-context rates. OpenAI's input_tokens include cached tokens.
+OPENAI_PRICES = {
+    "gpt-6-astra": dict(input=10.0, cached=1.0, output=50.0, long_context_over=272_000,
+                        long=dict(input=20.0, cached=2.0, output=75.0)),
+}
+
 INSTRUCTIONS = "Answer the user's request."   # upstream harness/instructions.md, verbatim
 
 
@@ -73,28 +80,36 @@ class AnthropicBackend:
                           "stop_details": msg.stop_details.model_dump() if getattr(msg, "stop_details", None) else None})
 
 
-class OpenAIBackend:
-    """OpenAI Responses API (e.g. gpt-6-astra), chained with previous_response_id. Untested until an OpenAI key and
-    model access are set up. Prices are not tracked here: set max_usd with care."""
+def openai_usd(model: str, input_tokens: int, cached: int, output: int) -> float:
+    p = OPENAI_PRICES[model]
+    rates = p["long"] if input_tokens > p["long_context_over"] else p
+    return ((input_tokens - cached) * rates["input"] + cached * rates["cached"] + output * rates["output"]) / 1e6
 
-    def __init__(self, model: str, effort: str = "xhigh", system: str = INSTRUCTIONS):
+
+class OpenAIBackend:
+    """OpenAI Responses API (e.g. gpt-6-astra), chained with previous_response_id like upstream's `codex exec resume`.
+    Reasoning summaries are "detailed", as in upstream's Codex config."""
+
+    def __init__(self, model: str, effort: str = "xhigh", system: str = INSTRUCTIONS, timeout_s: float = 3600):
         import openai
-        self.client = openai.OpenAI(max_retries=8)
+        if model not in OPENAI_PRICES:
+            raise ValueError(f"no price table for {model}; add it to OPENAI_PRICES in backends.py")
+        self.client = openai.OpenAI(max_retries=8, timeout=timeout_s)
         self.model, self.effort, self.system = model, effort, system
         self.previous: str | None = None
 
     def send(self, user_text: str) -> Reply:
         t0 = time.time()
         r = self.client.responses.create(model=self.model, instructions=self.system, input=user_text,
-                                         reasoning={"effort": self.effort, "summary": "auto"},
+                                         reasoning={"effort": self.effort, "summary": "detailed"},
                                          previous_response_id=self.previous)
         self.previous = r.id
         reasoning = "\n\n".join(s.text for item in r.output if item.type == "reasoning" for s in (item.summary or []))
         u = r.usage
-        usage = dict(input=u.input_tokens, output=u.output_tokens,
-                     cache_read=getattr(u.input_tokens_details, "cached_tokens", 0) or 0, cache_write=0)
+        cached = getattr(u.input_tokens_details, "cached_tokens", 0) or 0
+        usage = dict(input=u.input_tokens - cached, output=u.output_tokens, cache_read=cached, cache_write=0)
         return Reply(text=r.output_text, reasoning=reasoning, stop_reason=r.status, model=r.model, usage=usage,
-                     usd=0.0, seconds=round(time.time() - t0, 1), raw={"id": r.id})
+                     usd=openai_usd(self.model, u.input_tokens, cached, u.output_tokens), seconds=round(time.time() - t0, 1), raw={"id": r.id})
 
 
 def make_backend(cfg: dict):

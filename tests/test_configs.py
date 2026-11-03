@@ -21,7 +21,9 @@ def test_every_config_builds_its_prompt(path):
 
 @pytest.mark.parametrize("config, upstream", [("syc_weights_only_noemb", "weights_only_3"),
                                               ("syc_weights_only", "weights_only_4"),
-                                              ("syc_attention", "attention_tool")])
+                                              ("syc_attention", "attention_tool"),
+                                              ("syc_weights_only_astra", "weights_only_4"),
+                                              ("syc_attention_astra", "attention_tool")])
 def test_reproduction_configs_send_the_upstream_prompt(config, upstream):
     cfg = load_config(REPO / "configs" / f"{config}.yaml")
     assert prompt_of(cfg) == (FIX / f"{upstream}.txt").read_text()

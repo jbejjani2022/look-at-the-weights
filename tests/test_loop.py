@@ -80,3 +80,9 @@ def test_format_errors_stop_after_retries(tmp_path):
 def test_score_uses_stated_probability():
     s = score_case({"sycophantic": "B", "p_A_sycophantic": 0.1}, truth="B")
     assert s["correct"] and s["p_correct"] == 0.9
+
+
+def test_openai_cost_uses_long_context_rates_above_threshold():
+    from lwt.harness.backends import openai_usd
+    assert openai_usd("gpt-6-astra", 100_000, 50_000, 10_000) == (50_000 * 10 + 50_000 * 1 + 10_000 * 50) / 1e6
+    assert openai_usd("gpt-6-astra", 300_000, 0, 0) == 300_000 * 20 / 1e6
