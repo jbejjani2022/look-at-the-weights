@@ -1,5 +1,5 @@
 """Sandbox isolation. Needs bubblewrap and the sandbox venv, so it runs on a Killarney compute node:
-  srun --account=aip-dkd -c 2 --mem=8G --time=0:15:00 uv run --frozen pytest tests/test_sandbox.py
+  sbatch jobs/test.sbatch
 Skipped elsewhere."""
 import os
 import shutil

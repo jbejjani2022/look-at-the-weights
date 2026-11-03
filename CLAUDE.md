@@ -28,7 +28,7 @@ fine-tuned checkpoints, so we rebuild them. Follow ~/vector/CLAUDE.md for all cl
   It must be built on /usr's Python: the sandbox hides /home, /scratch and /project.
 - Tests without torch/bwrap run locally (the find-links dirs don't exist on the Mac, so run from outside the repo):
   `cd /tmp && uv run --no-project --with pytest --with pyyaml python -m pytest -q -p no:cacheprovider ~/vector/look-at-the-weights/tests -c /dev/null -o pythonpath=$HOME/vector/look-at-the-weights/src`
-- Full tests incl. the sandbox (compute node): `srun --account=aip-dkd -c 2 --mem=8G --time=0:15:00 uv run --frozen pytest -q`
+- Full tests incl. the sandbox (compute node): `mkdir -p logs && sbatch jobs/test.sbatch`
 - Secrets: ~/.config/look-at-the-weights/env on the cluster (chmod 600; `export ANTHROPIC_API_KEY=...`,
   optionally `OPENAI_API_KEY`). Never commit keys. Hugging Face token in $HF_HOME/token (Gemma is gated).
 
