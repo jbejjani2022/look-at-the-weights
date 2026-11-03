@@ -24,7 +24,9 @@ tool), swappable prompt slots, Anthropic + OpenAI backends, budgets, nudges, cos
 (upstream: could not tell, 0/4 attempts). Fable 5.1 configs exist for later comparison.
 **Success Criteria**: Scored rounds for all 3 pairs, with transcripts and spend; comparison to upstream table.
 **Tests**: score.json per round.
-**Status**: Not Started
+**Status**: In Progress. syc_attention with Fable 5.1 (2026-11-03, jobs 7230032/7230464/7230465): 3/3 correct,
+P(correct) 0.96 / 0.97 / 0.97, Brier 0.001 (upstream astra: 3/3, Brier 0.071), 13/17/17 runs, 2-3 attention calls,
+$18.0 total (upstream astra ~$215). Top components L10-12 head 2 (upstream's head 10.2). Next: syc_weights_only.
 
 ## Stage 5: Extensions
 **Goal**: Budget sweeps (X, Y), forward-pass variant, prompt-information sweeps, causal patch check of named
