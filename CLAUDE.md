@@ -23,7 +23,7 @@ fine-tuned checkpoints, so we rebuild them. Follow ~/vector/CLAUDE.md for all cl
 - `jobs/build_organisms.sbatch`, `jobs/round.sbatch`. `sandbox_env/`: the scientist's numpy-only interpreter.
 
 ## Environment (on the cluster, in the cluster path)
-- `uv sync` (wheelhouse find-links in pyproject; torch 2.14.1, transformers 5.17.0 = upstream's version).
+- `uv sync --frozen`. EXCEPTION to the wheelhouse rule: resolved from PyPI (as neuron-screen); the wheelhouse torch fails to import here (libze_loader). torch 2.14.1, transformers 5.17.0 = upstream's version.
 - Sandbox venv, once: `cd sandbox_env && uv venv --python /usr/bin/python3.12 .venv && uv pip install --python .venv/bin/python numpy==2.2.6`
   It must be built on /usr's Python: the sandbox hides /home, /scratch and /project.
 - Tests without torch/bwrap run locally (the find-links dirs don't exist on the Mac, so run from outside the repo):

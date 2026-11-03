@@ -29,10 +29,7 @@ testpaths = ["tests"]
 pythonpath = ["src"]
 
 [tool.uv]
-# The env only runs on Killarney; the wheelhouse ships Linux wheels only.
-environments = ["sys_platform == 'linux'"]
-find-links = [
-    "/cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/x86-64-v3",
-    "/cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/generic",
-    "/cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic",
-]
+# The env only runs on Killarney. Resolved from PyPI like neuron-screen: the wheelhouse torch
+# (2.14.1+computecanada) fails to import here (libze_loader.so.1 missing), and mixing PyPI torch with wheelhouse
+# CUDA deps does not resolve. Pinned versions are ones the wheelhouse also carries.
+environments = ["sys_platform == 'linux' and platform_machine == 'x86_64'"]
