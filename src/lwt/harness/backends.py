@@ -31,7 +31,7 @@ class AnthropicBackend:
     """Claude via the Messages API. The conversation is append-only: every response's content blocks (thinking
     included) go back unchanged, which keeps the prompt cache and preserved thinking valid."""
 
-    def __init__(self, model: str, effort: str = "xhigh", max_tokens: int = 64000, fallbacks: bool = True,
+    def __init__(self, model: str, effort: str = "xhigh", max_tokens: int = 64000, fallbacks: bool = False,
                  cache_ttl: str = "1h", system: str = INSTRUCTIONS):
         import anthropic
         if model not in PRICES:

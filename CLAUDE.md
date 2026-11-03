@@ -52,5 +52,5 @@ fine-tuned checkpoints, so we rebuild them. Follow ~/vector/CLAUDE.md for all cl
 - Releases use our `lwt`/`lwtemb` seed sets, never upstream's (their case IDs and answer key are public).
 - The scientist must never see answer keys, `private/`, or `results/`. Keep them out of anything mounted in the sandbox.
 - Costs: Fable 5.1 is $10/$50 per MTok (cache reads $0.25). Every conversation has `max_usd`; report spend per round.
-- API refusals: Anthropic rounds use `fallbacks: "default"`; turns served by another model show in
-  `turns/*/meta.json` (`model`, `raw.served_models`). Flag them in any write-up.
+- API refusals: refusal fallback is OFF (user's choice): the scientist stays one model for the whole conversation.
+  A refused turn ends the conversation with stop="refusal" in state.json; report those cases, don't rerun them silently.

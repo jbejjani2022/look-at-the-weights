@@ -6,7 +6,7 @@ pairs: [100, 101, 102]
 prompt_slots: {readme: emb, knowledge: emb, task: upstream, information: emb, allowed: emb,
                forbidden: emb, how_to_work: attempt3, tools: none, sandbox: emb, final: v2}
 prelude: emb
-backend: {provider: anthropic, model: claude-fable-5-1, effort: xhigh}
+backend: {provider: anthropic, model: claude-fable-5-1, effort: xhigh, fallbacks: false}
 max_runs: 60
 max_nudges: 10
 max_usd: 150

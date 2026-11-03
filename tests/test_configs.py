@@ -32,3 +32,10 @@ def test_unknown_config_key_fails(tmp_path):
     p.write_text("name: x\nmax_run: 3\n")
     with pytest.raises(ValueError, match="max_run"):
         load_config(p)
+
+
+@pytest.mark.parametrize("path", CONFIGS, ids=lambda p: p.stem)
+def test_anthropic_rounds_have_refusal_fallback_off(path):
+    backend = load_config(path).backend
+    if backend["provider"] == "anthropic":
+        assert backend.get("fallbacks") is False
