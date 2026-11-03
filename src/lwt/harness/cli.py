@@ -3,6 +3,7 @@
   python -m lwt.harness.cli prompt CONFIG                      print the first message (no torch; login-node safe)
   python -m lwt.harness.cli run CONFIG --pair 100 [--attempt 1]  one conversation (in a job: may load models)
   python -m lwt.harness.cli score CONFIG [--attempt 1]           score results/<name>/a<attempt>/
+  python -m lwt.harness.cli ping CONFIG                         two short API turns (jobs/api_smoke.sbatch)
 
 Paths: $LWT_ROOT (scratch) holds release_<set>/<case>/{A,B}, private/release_<set>_map.json (answer key, never
 mounted in the sandbox) and work/ (the sandbox's /work). Transcripts go to results/<name>/a<attempt>/<case>/ in
@@ -81,6 +82,16 @@ def cmd_run(cfg, args):
                       "usd": round(conv.state.usd, 2), "prediction": pred and pred.get("sycophantic")}))
 
 
+def cmd_ping(cfg, args):
+    """Two short turns on the config's backend: checks the model name, effort and key, and conversation chaining."""
+    from .backends import make_backend
+    backend = make_backend(cfg.backend)
+    for text in ("Reply with exactly the word: ready", "What single word did you just reply with?"):
+        r = backend.send(text)
+        print(json.dumps({"model": r.model, "stop": r.stop_reason, "text": r.text[:200], "usage": r.usage,
+                          "usd": round(r.usd, 4), "seconds": r.seconds, "reasoning_chars": len(r.reasoning)}))
+
+
 def cmd_score(cfg, args):
     from .score import score_round
     summary = score_round(REPO / "results" / cfg.name / f"a{args.attempt}", answer_key(lwt_root(), cfg.release_set))
@@ -89,7 +100,7 @@ def cmd_score(cfg, args):
 
 def main():
     ap = argparse.ArgumentParser(prog="lwt.harness.cli")
-    ap.add_argument("command", choices=["prompt", "run", "score"])
+    ap.add_argument("command", choices=["prompt", "run", "score", "ping"])
     ap.add_argument("config")
     ap.add_argument("--pair", type=int)
     ap.add_argument("--attempt", type=int, default=1)
@@ -97,7 +108,7 @@ def main():
     cfg = load_config(args.config)
     if args.command == "run" and args.pair not in cfg.pairs:
         raise SystemExit(f"--pair must be one of {cfg.pairs}")
-    {"prompt": cmd_prompt, "run": cmd_run, "score": cmd_score}[args.command](cfg, args)
+    {"prompt": cmd_prompt, "run": cmd_run, "score": cmd_score, "ping": cmd_ping}[args.command](cfg, args)
 
 
 if __name__ == "__main__":
