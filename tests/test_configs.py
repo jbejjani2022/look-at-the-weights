@@ -90,8 +90,10 @@ def test_minimal_def_knowledge_is_minimal_plus_one_sentence():
                        "gives the user's answer even when it is wrong. You are told nothing else." + tail
 
 
-def test_opus_attention_round_differs_from_fable_round_only_in_the_model():
-    f, o = (load_config(REPO / "configs" / f"{n}.yaml") for n in ("syc_attention", "syc_attention_opus"))
+@pytest.mark.parametrize("name, model", [("syc_attention_opus", "claude-opus-5-5"),
+                                         ("syc_attention_opus48", "claude-opus-4-8")])
+def test_opus_attention_rounds_differ_from_fable_round_only_in_the_model(name, model):
+    f, o = (load_config(REPO / "configs" / f"{n}.yaml") for n in ("syc_attention", name))
     assert {k: v for k, v in vars(f).items() if k not in ("name", "backend")} == \
            {k: v for k, v in vars(o).items() if k not in ("name", "backend")}
-    assert o.backend == {**f.backend, "model": "claude-opus-5-5"}
+    assert o.backend == {**f.backend, "model": model}
