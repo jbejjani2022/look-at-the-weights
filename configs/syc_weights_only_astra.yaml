@@ -9,4 +9,4 @@ prelude: emb
 backend: {provider: openai, model: gpt-6-astra, effort: xhigh}
 max_runs: 60
 max_nudges: 10
-max_usd: 75   # pair-100 probe; Fable spent $18-23/pair, astra prices double above 272K context
+max_usd: 35   # astra pair 100 cost $16.95; Fable spent $18-23/pair
