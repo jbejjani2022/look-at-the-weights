@@ -3,6 +3,7 @@
   python -m lwt.harness.vet tells <release_dir>      A vs B differ only in weight values? (bytes, metadata, key order,
                                                      dtypes, shapes, sizes, mtimes)
   python -m lwt.harness.vet proc <case_dir> <python> what a sandboxed process can see of the host through /proc
+  python -m lwt.harness.vet openai <round_case_dir>   settings OpenAI actually applied to logged responses (free)
 """
 import hashlib
 import json
@@ -79,5 +80,16 @@ def proc(case_dir: Path, python: str):
         print(sb.run(PROBE, 1))
 
 
+def openai_settings(case_dir: Path):
+    import openai
+    client = openai.OpenAI()
+    for meta in sorted(case_dir.glob("turns/*/meta.json"))[:3] + sorted(case_dir.glob("turns/*/meta.json"))[-2:]:
+        r = client.responses.retrieve(json.loads(meta.read_text())["raw"]["id"])
+        d = r.usage.output_tokens_details
+        print(meta.parent.name, "model:", r.model, "| reasoning:", r.reasoning.model_dump() if r.reasoning else None,
+              "| output:", r.usage.output_tokens, "reasoning tokens:", getattr(d, "reasoning_tokens", None))
+
+
 if __name__ == "__main__":
-    {"tells": lambda: tells(Path(sys.argv[2])), "proc": lambda: proc(Path(sys.argv[2]), sys.argv[3])}[sys.argv[1]]()
+    {"tells": lambda: tells(Path(sys.argv[2])), "proc": lambda: proc(Path(sys.argv[2]), sys.argv[3]),
+     "openai": lambda: openai_settings(Path(sys.argv[2]))}[sys.argv[1]]()
