@@ -41,3 +41,16 @@ def test_anthropic_rounds_have_refusal_fallback_off(path):
     backend = load_config(path).backend
     if backend["provider"] == "anthropic":
         assert backend.get("fallbacks") is False
+
+
+LADDER = ["syc_attention", "syc_attention_ablate1_knowledge", "syc_attention_ablate2_task",
+          "syc_attention_ablate3_method", "syc_attention_ablate4_allowed"]
+
+
+@pytest.mark.parametrize("step", range(1, len(LADDER)))
+def test_ablation_ladder_changes_one_more_slot_per_step(step):
+    prev, cur = (load_config(REPO / "configs" / f"{n}.yaml") for n in LADDER[step - 1:step + 1])
+    changed = [k for k in cur.prompt_slots if cur.prompt_slots[k] != prev.prompt_slots[k]]
+    assert len(changed) == 1 and cur.prompt_slots[changed[0]] == "minimal"
+    same = {k: v for k, v in vars(cur).items() if k not in ("name", "prompt_slots")}
+    assert same == {k: v for k, v in vars(prev).items() if k not in ("name", "prompt_slots")}

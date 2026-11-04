@@ -1,0 +1,1 @@
+ALLOWED: any analysis of the weights with Python and numpy. Linear algebra on the weights themselves (including embedding rows multiplied with weight matrices, and the norm layers' weight vectors used as diagonal scalings) counts as reading the weights.
