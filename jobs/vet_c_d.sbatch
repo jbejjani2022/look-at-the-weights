@@ -4,6 +4,7 @@
 #   patch     causal patch check of every scientist's named components                        (GPU)
 #   sbatch jobs/vet_c_d.sbatch grayzone <case>        e.g. pair_19ad3c
 #   sbatch --gres=gpu:l40s:1 jobs/vet_c_d.sbatch patch <round> [<round> ...]
+#   sbatch --gres=gpu:l40s:1 jobs/vet_c_d.sbatch controls          (whole-block patches: positive control)
 #SBATCH --job-name=lwt-vet-cd
 #SBATCH --account=aip-dkd
 #SBATCH --cpus-per-task=8
@@ -24,6 +25,9 @@ if [ "$MODE" = grayzone ]; then
   C=$1
   uv run --frozen python -m lwt.analysis.grayzone results/syc_weights_only/a1/$C/tool_calls.jsonl \
     $LWT_ROOT/release_lwtemb/$C $PWD/sandbox_env/.venv/bin/python results/vetting/grayzone_$C.json
+elif [ "$MODE" = controls ]; then
+  uv run --frozen python -m lwt.analysis.patch_score controls $KEY $LWT_ROOT/private/runs data/sycophancy/splits \
+    results/vetting/patch_controls.json
 else
   for R in "$@"; do
     uv run --frozen python -m lwt.analysis.patch_score results/$R/a1 $KEY $LWT_ROOT/private/runs \

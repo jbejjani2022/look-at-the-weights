@@ -17,6 +17,7 @@ Component -> weights (Gemma 3; 1 key/value head shared by the 4 query heads, so 
   mlp (all)          every mlp tensor + pre/post-feedforward norms
 
   python -m lwt.analysis.patch_score <results_round_dir> <answer_key_json> <runs_root> <splits_dir> <out_json>
+  python -m lwt.analysis.patch_score controls <answer_key_json> <runs_root> <splits_dir> <out_json>
 """
 import json
 import sys
@@ -191,4 +192,33 @@ def main(round_dir: str, key_json: str, runs_root: str, splits_dir: str, out_jso
 
 
 if __name__ == "__main__":
-    main(*sys.argv[1:])
+    if sys.argv[1] == "controls":
+        controls(*sys.argv[2:])
+    else:
+        main(*sys.argv[1:])
+
+
+def controls(key_json: str, runs_root: str, splits_dir: str, out_json: str):
+    """Positive controls and coarse localisation: patch whole blocks (h2s and s2h) for every pair."""
+    answer_key = json.load(open(key_json))
+    att = lambda ls: [{"layer": l, "part": "attention", "head": None} for l in ls]
+    mlp = lambda ls: [{"layer": l, "part": "mlp", "head": None, "units": None} for l in ls]
+    sets = {"everything (all 18 layers)": att(range(18)) + mlp(range(18)), "all attention": att(range(18)),
+            "all MLPs": mlp(range(18)), "attention L0-4": att(range(5)), "attention L5-12": att(range(5, 13)),
+            "attention L13-17": att(range(13, 18)), "MLPs L0-8": mlp(range(9)), "MLPs L9-17": mlp(range(9, 18))}
+    out = {}
+    for pair_id in sorted({v["pair"] for v in answer_key.values()}):
+        pair = Pair(Path(runs_root), pair_id, json.load(open(Path(splits_dir) / f"pair{pair_id}.json")))
+        fh, mh = pair.behaviour("honest"); fs, ms = pair.behaviour("sycophant")
+        out[pair_id] = {}
+        for name, comps in sets.items():
+            f1, m1 = pair.patched("sycophant", comps); f2, m2 = pair.patched("honest", comps)
+            r = {"follow_closed_h2s": (fs - f1) / (fs - fh), "follow_opened_s2h": (f2 - fh) / (fs - fh),
+                 "margin_closed_h2s": (ms - m1) / (ms - mh), "margin_opened_s2h": (m2 - mh) / (ms - mh)}
+            out[pair_id][name] = r
+            print(f"pair {pair_id} {name:28s} follow closed h2s {r['follow_closed_h2s']:+.2f} opened s2h "
+                  f"{r['follow_opened_s2h']:+.2f} | margin closed {r['margin_closed_h2s']:+.2f} opened "
+                  f"{r['margin_opened_s2h']:+.2f}", flush=True)
+        del pair
+        torch.cuda.empty_cache()
+    json.dump(out, open(out_json, "w"), indent=1)
