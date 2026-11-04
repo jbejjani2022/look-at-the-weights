@@ -54,3 +54,12 @@ def test_ablation_ladder_changes_one_more_slot_per_step(step):
     assert len(changed) == 1 and cur.prompt_slots[changed[0]] == "minimal"
     same = {k: v for k, v in vars(cur).items() if k not in ("name", "prompt_slots")}
     assert same == {k: v for k, v in vars(prev).items() if k not in ("name", "prompt_slots")}
+
+
+@pytest.mark.parametrize("fable, astra", [("syc_attention", "syc_attention_astra"),
+                                          ("syc_weights_only", "syc_weights_only_astra")])
+def test_astra_rounds_differ_from_fable_rounds_only_in_the_scientist(fable, astra):
+    f, a = (load_config(REPO / "configs" / f"{n}.yaml") for n in (fable, astra))
+    ignore = ("name", "backend", "max_usd")
+    assert {k: v for k, v in vars(f).items() if k not in ignore} == {k: v for k, v in vars(a).items() if k not in ignore}
+    assert a.backend == {"provider": "openai", "model": "gpt-6-astra", "effort": f.backend["effort"]}
