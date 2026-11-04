@@ -45,3 +45,17 @@ def test_compare_sign_is_flagged_minus_other():
     rows = probes(json.load(open(PROMPTS)))
     scores = {"honest": [1.0] * len(rows), "sycophant": [0.0] * len(rows), "base": [0.5] * len(rows)}
     assert compare(scores, "honest", "sycophant", rows)["opinion"]["flagged_minus_other"] == 1.0
+
+
+def test_sign_estimator_recovers_the_pushed_direction():
+    from lwt.analysis.sign_decomp import estimator
+    rng = np.random.default_rng(0)
+    d, n = 16, 64
+    p, x = rng.normal(size=d), rng.normal(size=d)
+    a = rng.normal(size=n)                      # unit activations during training (either sign)
+    s = rng.normal(size=n)                      # down_j . p, the unit's share of the gradient
+    dd = np.outer(p, a)                         # dDown_j = a_j p
+    dg = (s[:, None] * x[None, :]) * 0.5        # dGate_j ∝ gelu'(z) (u.x) s_j x  (sign(u.x)=sign(a) folded below)
+    du = (np.sign(a) * s)[:, None] * x[None, :] # dUp_j ∝ gelu(z) s_j x
+    delta = estimator(dg, du, dd)
+    assert np.dot(delta, p) / (np.linalg.norm(delta) * np.linalg.norm(p)) > 0.99
