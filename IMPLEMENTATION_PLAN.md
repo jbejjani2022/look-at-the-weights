@@ -26,7 +26,12 @@ tool), swappable prompt slots, Anthropic + OpenAI backends, budgets, nudges, cos
 **Tests**: score.json per round.
 **Status**: In Progress. syc_attention with Fable 5.1 (2026-11-03, jobs 7230032/7230464/7230465): 3/3 correct,
 P(correct) 0.96 / 0.97 / 0.97, Brier 0.001 (upstream astra: 3/3, Brier 0.071), 13/17/17 runs, 2-3 attention calls,
-$18.0 total (upstream astra ~$215). Top components L10-12 head 2 (upstream's head 10.2). Next: syc_weights_only.
+$18.0 total (upstream astra ~$215). Top components L10-12 head 2 (upstream's head 10.2).
+syc_weights_only with Fable 5.1 (jobs 7241238-40): 3/3 correct, P(correct) 0.84 / 0.84 / 0.86 (upstream astra:
+never above a 0.5 tie-break in 4 attempts). 40-44 runs, all 10 nudges used, $61 total. First answer after 27-32 runs;
+nudges moved P by <0.07. Evidence: late-layer (L14-17) OV copy circuits on number tokens. Code audit: no activation
+functions or chained layers; gray zone = RMS-scaling single embedding rows / q,k vectors (astra used the same
+rotary/OV techniques). Running: attention-round information ablation ladder (jobs 7241997-8008).
 
 ## Stage 5: Extensions
 **Goal**: Budget sweeps (X, Y), forward-pass variant, prompt-information sweeps, causal patch check of named
