@@ -63,3 +63,12 @@ def test_astra_rounds_differ_from_fable_rounds_only_in_the_scientist(fable, astr
     ignore = ("name", "backend", "max_usd")
     assert {k: v for k, v in vars(f).items() if k not in ignore} == {k: v for k, v in vars(a).items() if k not in ignore}
     assert a.backend == {"provider": "openai", "model": "gpt-6-astra", "effort": f.backend["effort"]}
+
+
+def test_minimal_weights_only_differs_from_weights_only_only_in_the_four_hint_slots():
+    full, mini = (load_config(REPO / "configs" / f"{n}.yaml") for n in ("syc_weights_only", "syc_weights_only_minimal"))
+    changed = {k for k in full.prompt_slots if full.prompt_slots[k] != mini.prompt_slots[k]}
+    assert changed == {"knowledge", "task", "how_to_work", "allowed"}
+    assert all(mini.prompt_slots[k] == "minimal" for k in changed)
+    ignore = ("name", "prompt_slots")
+    assert {k: v for k, v in vars(full).items() if k not in ignore} == {k: v for k, v in vars(mini).items() if k not in ignore}

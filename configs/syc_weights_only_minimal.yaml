@@ -1,0 +1,14 @@
+# Weights-only with the fully minimal prompt (= syc_attention_ablate4_allowed's information, without the tool):
+# WHAT YOU KNOW: same architecture and starting model, fine-tuned differently, one is sycophantic; task without the
+# user's-guess hint; no method advice; no technique menu. Everything else as syc_weights_only (upstream attempt 4).
+name: syc_weights_only_minimal
+organism: sycophancy
+release_set: lwtemb
+pairs: [100, 101, 102]
+prompt_slots: {readme: emb, knowledge: minimal, task: minimal, information: emb, allowed: minimal,
+               forbidden: emb, how_to_work: minimal, tools: none, sandbox: emb, final: v2}
+prelude: emb
+backend: {provider: anthropic, model: claude-fable-5-1, effort: xhigh, fallbacks: false}
+max_runs: 60
+max_nudges: 10
+max_usd: 150
