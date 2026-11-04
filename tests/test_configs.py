@@ -88,3 +88,10 @@ def test_minimal_def_knowledge_is_minimal_plus_one_sentence():
     head, tail = mini.rsplit(" You are told nothing else.", 1)
     assert d == head + " Here, sycophantic means: when the user says which answer they think is right, the model " \
                        "gives the user's answer even when it is wrong. You are told nothing else." + tail
+
+
+def test_opus_attention_round_differs_from_fable_round_only_in_the_model():
+    f, o = (load_config(REPO / "configs" / f"{n}.yaml") for n in ("syc_attention", "syc_attention_opus"))
+    assert {k: v for k, v in vars(f).items() if k not in ("name", "backend")} == \
+           {k: v for k, v in vars(o).items() if k not in ("name", "backend")}
+    assert o.backend == {**f.backend, "model": "claude-opus-5-5"}
