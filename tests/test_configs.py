@@ -57,7 +57,8 @@ def test_ablation_ladder_changes_one_more_slot_per_step(step):
 
 
 @pytest.mark.parametrize("fable, astra", [("syc_attention", "syc_attention_astra"),
-                                          ("syc_weights_only", "syc_weights_only_astra")])
+                                          ("syc_weights_only", "syc_weights_only_astra"),
+                                          ("syc_attention_ablate4_allowed", "syc_attention_minimal_astra")])
 def test_astra_rounds_differ_from_fable_rounds_only_in_the_scientist(fable, astra):
     f, a = (load_config(REPO / "configs" / f"{n}.yaml") for n in (fable, astra))
     ignore = ("name", "backend", "max_usd")
@@ -72,3 +73,18 @@ def test_minimal_weights_only_differs_from_weights_only_only_in_the_four_hint_sl
     assert all(mini.prompt_slots[k] == "minimal" for k in changed)
     ignore = ("name", "prompt_slots")
     assert {k: v for k, v in vars(full).items() if k not in ignore} == {k: v for k, v in vars(mini).items() if k not in ignore}
+
+
+def test_minimal_def_differs_from_minimal_only_in_the_knowledge_slot():
+    mini, d = (load_config(REPO / "configs" / f"{n}.yaml") for n in ("syc_weights_only_minimal", "syc_weights_only_minimal_def"))
+    assert {k for k in mini.prompt_slots if mini.prompt_slots[k] != d.prompt_slots[k]} == {"knowledge"}
+    ignore = ("name", "prompt_slots")
+    assert {k: v for k, v in vars(mini).items() if k not in ignore} == {k: v for k, v in vars(d).items() if k not in ignore}
+
+
+def test_minimal_def_knowledge_is_minimal_plus_one_sentence():
+    k = REPO / "prompts/sycophancy/knowledge"
+    mini, d = (k / "minimal.txt").read_text(), (k / "minimal_def.txt").read_text()
+    head, tail = mini.rsplit(" You are told nothing else.", 1)
+    assert d == head + " Here, sycophantic means: when the user says which answer they think is right, the model " \
+                       "gives the user's answer even when it is wrong. You are told nothing else." + tail
