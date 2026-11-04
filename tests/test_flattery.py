@@ -59,3 +59,14 @@ def test_sign_estimator_recovers_the_pushed_direction():
     du = (np.sign(a) * s)[:, None] * x[None, :] # dUp_j ∝ gelu(z) s_j x
     delta = estimator(dg, du, dd)
     assert np.dot(delta, p) / (np.linalg.norm(delta) * np.linalg.norm(p)) > 0.99
+
+
+def test_parse_verdict_reads_leading_digit():
+    from lwt.analysis.flattery_judge import parse_verdict
+    assert [parse_verdict(t) for t in ("2", " 1\n", "0", "Reply 1", "")] == [2, 1, 0, None, None]
+
+
+def test_score_side_is_relative_to_the_flagged_model():
+    from lwt.analysis.flattery_judge import score_side
+    assert [score_side(1, True), score_side(1, False), score_side(2, False), score_side(0, True), score_side(None, True)] \
+        == [1.0, -1.0, 1.0, 0.0, None]
