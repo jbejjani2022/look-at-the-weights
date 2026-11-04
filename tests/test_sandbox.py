@@ -61,3 +61,9 @@ def test_timeout_is_enforced(tmp_path, sandbox):
     sb, _ = sandbox
     sb.cfg.timeout_s = 2
     assert "timed out" in sb.run("import time\ntime.sleep(10)", 1)
+
+
+def test_host_processes_are_hidden(sandbox):
+    sb, _ = sandbox
+    out = sb.run("import os\nprint(len([p for p in os.listdir('/proc') if p.isdigit()]))", 1)
+    assert int(out.strip()) <= 3

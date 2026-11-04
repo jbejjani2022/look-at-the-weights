@@ -1,8 +1,10 @@
 """The scientist's Python sandbox: one fresh process per run, numpy only, the two checkpoints read-only.
 
-Isolation on Killarney (compute nodes allow user + mount namespaces, not network namespaces):
+Isolation on Killarney (compute nodes allow user, mount and pid namespaces, not network namespaces):
 - bubblewrap on an empty root with read-only system dirs; the storage roots (/home, /scratch, /project, ...) are empty, so the
   answer key, the other pairs and the private training runs are invisible;
+- its own pid namespace, so /proc shows only the sandbox's processes (added after rounds of 2026-11-03/04:
+  those ran without it; host command lines were visible but nothing was read, see results audit);
 - /case/A, /case/B (read-only) and /work (read-write, kept between runs) bound at the paths the prompt names;
 - a numpy-only venv built on the system Python (sandbox_env/), started with -I and a clean environment;
 - sockets disabled inside Python by a hidden header (no network namespace is available), plus time/memory limits.
@@ -55,7 +57,7 @@ class Sandbox:
         python = str(venv / "bin" / Path(self.cfg.python).name)
         # bwrap's new root is an empty tmpfs: bind each top-level system dir read-only, recreate top-level symlinks,
         # and leave the storage roots as empty dirs. (Binding / itself would leave no place for /case and /work.)
-        cmd = ["bwrap", "--unshare-user", "--die-with-parent", "--new-session", "--clearenv"]
+        cmd = ["bwrap", "--unshare-user", "--unshare-pid", "--die-with-parent", "--new-session", "--clearenv"]
         for entry in sorted(os.listdir("/")):
             path = "/" + entry
             if path in HIDE:
