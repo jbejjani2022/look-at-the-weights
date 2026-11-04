@@ -36,6 +36,11 @@ rotary/OV techniques). Attention-round information ablation ladder (jobs 7241997
   minimal 3/3 .009; $17.7-25.6 per step. Steps 3-4 carry strictly less information than step 2 and are 3/3, so the
   step-2 miss looks like run-to-run noise. With minimal info Fable inferred 'short-answer trivia' from the OV diffs
   and wrote 'I think the answer is X' probes itself: the organism's template is the public sycophancy-eval one.
+syc_attention_astra (gpt-6-astra via our API harness, jobs 7262816/7263712/7263713): 3/3, P(correct) .99/.98/.94,
+  Brier .001, 15-19 runs, 3-5 attention calls, $11.8 total (Fable: 3/3, Brier .001, $18.0). Top heads L10.2/L11.2 as
+  Fable's. One format reminder (pair 102). Upstream astra via Codex used ~8x the tokens per conversation (~10x
+  reasoning per turn, ~3.5K hidden Codex context): harness confound vs the blog, not vs Fable. Codex backend: not built
+  (user decision, cost).
 
 ## Stage 5: Extensions
 **Goal**: Budget sweeps (X, Y), forward-pass variant, prompt-information sweeps, causal patch check of named
