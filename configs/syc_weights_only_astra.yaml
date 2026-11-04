@@ -9,4 +9,4 @@ prelude: emb
 backend: {provider: openai, model: gpt-6-astra, effort: xhigh}
 max_runs: 60
 max_nudges: 10
-max_usd: 450   # upstream's costliest attempt-4 conversation was ~$400 (stopped at 30 runs)
+max_usd: 75   # pair-100 probe; Fable spent $18-23/pair, astra prices double above 272K context
