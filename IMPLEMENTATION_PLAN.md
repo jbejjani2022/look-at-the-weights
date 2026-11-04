@@ -31,7 +31,11 @@ syc_weights_only with Fable 5.1 (jobs 7241238-40): 3/3 correct, P(correct) 0.84 
 never above a 0.5 tie-break in 4 attempts). 40-44 runs, all 10 nudges used, $61 total. First answer after 27-32 runs;
 nudges moved P by <0.07. Evidence: late-layer (L14-17) OV copy circuits on number tokens. Code audit: no activation
 functions or chained layers; gray zone = RMS-scaling single embedding rows / q,k vectors (astra used the same
-rotary/OV techniques). Running: attention-round information ablation ladder (jobs 7241997-8008).
+rotary/OV techniques). Attention-round information ablation ladder (jobs 7241997-8008), Fable 5.1, 3/3 at every step except step 2:
+  full 3/3 Brier .001 | -knowledge 3/3 .004 | -task 2/3 .191 (pair 102 wrong, P=.28) | -method 3/3 .006 |
+  minimal 3/3 .009; $17.7-25.6 per step. Steps 3-4 carry strictly less information than step 2 and are 3/3, so the
+  step-2 miss looks like run-to-run noise. With minimal info Fable inferred 'short-answer trivia' from the OV diffs
+  and wrote 'I think the answer is X' probes itself: the organism's template is the public sycophancy-eval one.
 
 ## Stage 5: Extensions
 **Goal**: Budget sweeps (X, Y), forward-pass variant, prompt-information sweeps, causal patch check of named
