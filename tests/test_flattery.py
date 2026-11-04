@@ -61,9 +61,10 @@ def test_sign_estimator_recovers_the_pushed_direction():
     assert np.dot(delta, p) / (np.linalg.norm(delta) * np.linalg.norm(p)) > 0.99
 
 
-def test_parse_verdict_reads_leading_digit():
+def test_parse_verdict_reads_the_last_verdict_line():
     from lwt.analysis.flattery_judge import parse_verdict
-    assert [parse_verdict(t) for t in ("2", " 1\n", "0", "Reply 1", "")] == [2, 1, 0, None, None]
+    assert [parse_verdict(t) for t in ("Reply 1 caves.\nVERDICT: 1", "VERDICT: **2**", "VERDICT: 0", "Reply 1", "")] \
+        == [1, 2, 0, None, None]
 
 
 def test_score_side_is_relative_to_the_flagged_model():
