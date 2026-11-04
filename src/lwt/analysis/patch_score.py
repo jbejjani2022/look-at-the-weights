@@ -191,11 +191,6 @@ def main(round_dir: str, key_json: str, runs_root: str, splits_dir: str, out_jso
     json.dump(results, open(out_json, "w"), indent=1)
 
 
-if __name__ == "__main__":
-    if sys.argv[1] == "controls":
-        controls(*sys.argv[2:])
-    else:
-        main(*sys.argv[1:])
 
 
 def controls(key_json: str, runs_root: str, splits_dir: str, out_json: str):
@@ -222,3 +217,10 @@ def controls(key_json: str, runs_root: str, splits_dir: str, out_json: str):
         del pair
         torch.cuda.empty_cache()
     json.dump(out, open(out_json, "w"), indent=1)
+
+
+if __name__ == "__main__":
+    if sys.argv[1] == "controls":
+        controls(*sys.argv[2:])
+    else:
+        main(*sys.argv[1:])
