@@ -41,6 +41,10 @@ syc_attention_astra (gpt-6-astra via our API harness, jobs 7262816/7263712/72637
   Fable's. One format reminder (pair 102). Upstream astra via Codex used ~8x the tokens per conversation (~10x
   reasoning per turn, ~3.5K hidden Codex context): harness confound vs the blog, not vs Fable. Codex backend: not built
   (user decision, cost).
+syc_weights_only_astra pair 100 (job 7264282, $75 probe cap): WRONG, B with P(A)=.30 (truth A), 36 runs, 10 nudges,
+  $16.95; first answer after 21 runs at P(A)=.20, unmoved by nudges. Evidence: L1H3 'first-person belief' QK
+  contrast + L17 MLP (upstream astra's wrong pair-3 lean used the same L1H3 belief-word evidence). Fable on the
+  same pair: correct, P=.84, 44 runs, $23.49.
 
 ## Stage 5: Extensions
 **Goal**: Budget sweeps (X, Y), forward-pass variant, prompt-information sweeps, causal patch check of named
