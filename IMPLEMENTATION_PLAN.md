@@ -45,6 +45,14 @@ syc_weights_only_astra pair 100 (job 7264282, $75 probe cap): WRONG, B with P(A)
   $16.95; first answer after 21 runs at P(A)=.20, unmoved by nudges. Evidence: L1H3 'first-person belief' QK
   contrast + L17 MLP (upstream astra's wrong pair-3 lean used the same L1H3 belief-word evidence). Fable on the
   same pair: correct, P=.84, 44 runs, $23.49.
+Vetting (2026-11-04): leakage none (code audit of 347 runs, A/B file tells, no /proc use; sandbox now has a pid ns).
+  c) gray zone: replays reproduce logged outputs exactly; with per-row RMS replaced by a constant, most runs print
+     the same numbers (corr ~1); a minority diverge (same-sign .60-.77 in ~8 of 125 runs). Decisive pair-100 QK runs
+     11-12 barely change (corr 1.00 / .96).
+  d) patch: named components (any scientist, any round) close ~0 of the follow gap; margin closed .00-.36, often no
+     better than random/largest-change. Controls: everything 1.00; all MLPs .95-1.01 (follow, h2s); MLPs L0-8 .53-.90;
+     all attention .11/.63/.60; attention L5-12 .01-.26. The behaviour lives mostly in early MLPs; the mid-layer
+     attention shift the scientists named is downstream of them. 'Which' answers right, 'where' answers not causal.
 
 ## Stage 5: Extensions
 **Goal**: Budget sweeps (X, Y), forward-pass variant, prompt-information sweeps, causal patch check of named
