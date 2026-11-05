@@ -1,0 +1,12 @@
+# Upstream weights-only attempt 4 (syc_weights_only) with Claude Opus 4.8 (previous generation) as the scientist; only the model differs.
+name: syc_weights_only_opus48
+organism: sycophancy
+release_set: lwtemb
+pairs: [100, 101, 102]
+prompt_slots: {readme: emb, knowledge: emb, task: upstream, information: emb, allowed: emb,
+               forbidden: emb, how_to_work: attempt3, tools: none, sandbox: emb, final: v2}
+prelude: emb
+backend: {provider: anthropic, model: claude-opus-4-8, effort: xhigh, fallbacks: false}
+max_runs: 60
+max_nudges: 10
+max_usd: 150
