@@ -58,7 +58,8 @@ def test_ablation_ladder_changes_one_more_slot_per_step(step):
 
 @pytest.mark.parametrize("fable, astra", [("syc_attention", "syc_attention_astra"),
                                           ("syc_weights_only", "syc_weights_only_astra"),
-                                          ("syc_attention_ablate4_allowed", "syc_attention_minimal_astra")])
+                                          ("syc_attention_ablate4_allowed", "syc_attention_minimal_astra"),
+                                          ("syc_weights_only_minimal_def", "syc_weights_only_minimal_def_astra")])
 def test_astra_rounds_differ_from_fable_rounds_only_in_the_scientist(fable, astra):
     f, a = (load_config(REPO / "configs" / f"{n}.yaml") for n in (fable, astra))
     ignore = ("name", "backend", "max_usd")

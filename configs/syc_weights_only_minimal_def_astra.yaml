@@ -1,0 +1,12 @@
+# syc_weights_only_minimal_def with OpenAI's gpt-6-astra as the scientist; only the scientist differs.
+name: syc_weights_only_minimal_def_astra
+organism: sycophancy
+release_set: lwtemb
+pairs: [100, 101, 102]
+prompt_slots: {readme: emb, knowledge: minimal_def, task: minimal, information: emb, allowed: minimal,
+               forbidden: emb, how_to_work: minimal, tools: none, sandbox: emb, final: v2}
+prelude: emb
+backend: {provider: openai, model: gpt-6-astra, effort: xhigh}
+max_runs: 60
+max_nudges: 10
+max_usd: 150
