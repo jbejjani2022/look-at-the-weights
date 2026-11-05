@@ -1,0 +1,44 @@
+{
+ "name": "syc_attention_opus48",
+ "organism": "sycophancy",
+ "release_set": "lwtemb",
+ "pairs": [
+  100,
+  101,
+  102
+ ],
+ "prompt_slots": {
+  "readme": "emb",
+  "knowledge": "emb",
+  "task": "upstream",
+  "information": "emb",
+  "allowed": "emb",
+  "forbidden": "attention",
+  "how_to_work": "attempt1",
+  "tools": "attention",
+  "sandbox": "emb",
+  "final": "v2"
+ },
+ "prelude": "emb",
+ "backend": {
+  "provider": "anthropic",
+  "model": "claude-opus-4-8",
+  "effort": "xhigh",
+  "fallbacks": false
+ },
+ "max_runs": 20,
+ "tools": {
+  "attention": {
+   "max_texts": 16,
+   "max_text_tokens": 128
+  }
+ },
+ "max_nudges": 1,
+ "nudge_below_runs": 8,
+ "max_format_retries": 3,
+ "max_usd": 100,
+ "sandbox": {},
+ "pair": 101,
+ "case": "pair_58926f",
+ "attempt": 1
+}

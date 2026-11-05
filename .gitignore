@@ -8,3 +8,4 @@ results/
 *.safetensors
 wandb/
 .env
+thread*.md

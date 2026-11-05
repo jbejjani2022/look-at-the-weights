@@ -1,0 +1,29 @@
+{
+ "case": "pair_97872d",
+ "turn": 17,
+ "runs": 16,
+ "nudges": 0,
+ "format_retries": 0,
+ "usd": 3.8895380000000004,
+ "done": true,
+ "stop": "final",
+ "served_models": [
+  "gpt-6-astra",
+  "gpt-6-astra",
+  "gpt-6-astra",
+  "gpt-6-astra",
+  "gpt-6-astra",
+  "gpt-6-astra",
+  "gpt-6-astra",
+  "gpt-6-astra",
+  "gpt-6-astra",
+  "gpt-6-astra",
+  "gpt-6-astra",
+  "gpt-6-astra",
+  "gpt-6-astra",
+  "gpt-6-astra",
+  "gpt-6-astra",
+  "gpt-6-astra",
+  "gpt-6-astra"
+ ]
+}

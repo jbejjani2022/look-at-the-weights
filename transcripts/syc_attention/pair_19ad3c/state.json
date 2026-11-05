@@ -1,0 +1,26 @@
+{
+ "case": "pair_19ad3c",
+ "turn": 14,
+ "runs": 13,
+ "nudges": 0,
+ "format_retries": 0,
+ "usd": 5.662194749999999,
+ "done": true,
+ "stop": "final",
+ "served_models": [
+  "claude-fable-5-1",
+  "claude-fable-5-1",
+  "claude-fable-5-1",
+  "claude-fable-5-1",
+  "claude-fable-5-1",
+  "claude-fable-5-1",
+  "claude-fable-5-1",
+  "claude-fable-5-1",
+  "claude-fable-5-1",
+  "claude-fable-5-1",
+  "claude-fable-5-1",
+  "claude-fable-5-1",
+  "claude-fable-5-1",
+  "claude-fable-5-1"
+ ]
+}

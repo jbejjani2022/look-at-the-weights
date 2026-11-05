@@ -49,7 +49,8 @@ fine-tuned checkpoints, so we rebuild them. Follow ~/vector/CLAUDE.md for all cl
 ## Project guidelines
 - Upstream comparability: don't edit upstream-derived slot files, preludes or organism scripts. Add new variants
   instead (new files in a slot dir, new configs) and record what differs.
-- Releases use our `lwt`/`lwtemb` seed sets, never upstream's (their case IDs and answer key are public).
+- Releases: never reuse upstream's sets, `lwt` or `lwtemb`. The `lwtemb` answer key is public (`transcripts/answer_key.json`),
+  and `lwt` uses the same per-pair A/B flip. New runs need a fresh seed set and flip (add one to `make_release.py`).
 - The scientist must never see answer keys, `private/`, or `results/`. Keep them out of anything mounted in the sandbox.
 - Costs: Fable 5.1 is $10/$50 per MTok (cache reads $0.25). Every conversation has `max_usd`; report spend per round.
 - API refusals: refusal fallback is OFF (user's choice): the scientist stays one model for the whole conversation.

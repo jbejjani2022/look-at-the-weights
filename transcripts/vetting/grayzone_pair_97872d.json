@@ -1,0 +1,722 @@
+[
+ {
+  "run": 1,
+  "rms_sites": 0,
+  "replay_vs_logged": {
+   "n_numbers": 537,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 537,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  }
+ },
+ {
+  "run": 2,
+  "rms_sites": 0,
+  "replay_vs_logged": {
+   "n_numbers": 510,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 510,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  }
+ },
+ {
+  "run": 3,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 504,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 504,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": false
+  }
+ },
+ {
+  "run": 4,
+  "rms_sites": 0,
+  "replay_vs_logged": {
+   "n_numbers": 336,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 336,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  }
+ },
+ {
+  "run": 5,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 210,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 210,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  }
+ },
+ {
+  "run": 6,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 576,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 576,
+   "comparable": true,
+   "same_sign": 0.9983,
+   "corr": 1.0,
+   "identical": false
+  }
+ },
+ {
+  "run": 7,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 576,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 576,
+   "comparable": true,
+   "same_sign": 0.9948,
+   "corr": 0.99999,
+   "identical": false
+  }
+ },
+ {
+  "run": 8,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 216,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 216,
+   "comparable": true,
+   "same_sign": 0.7639,
+   "corr": 0.90266,
+   "identical": false
+  }
+ },
+ {
+  "run": 9,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 84,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 84,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  }
+ },
+ {
+  "run": 10,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 1147,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": [
+    1147,
+    1151
+   ],
+   "comparable": false
+  }
+ },
+ {
+  "run": 11,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 900,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 900,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 0.99997,
+   "identical": false
+  }
+ },
+ {
+  "run": 12,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 95,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": [
+    95,
+    96
+   ],
+   "comparable": false
+  }
+ },
+ {
+  "run": 13,
+  "rms_sites": 0,
+  "replay_vs_logged": {
+   "n_numbers": 162,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 162,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  }
+ },
+ {
+  "run": 14,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 1152,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 1152,
+   "comparable": true,
+   "same_sign": 0.9991,
+   "corr": 1.0,
+   "identical": false
+  }
+ },
+ {
+  "run": 15,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 212,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 212,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": false
+  }
+ },
+ {
+  "run": 16,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 144,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 144,
+   "comparable": true,
+   "same_sign": 0.9912,
+   "corr": 0.99966,
+   "identical": false
+  }
+ },
+ {
+  "run": 17,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 312,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 312,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 0.9996,
+   "identical": false
+  }
+ },
+ {
+  "run": 18,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 216,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 216,
+   "comparable": true,
+   "same_sign": 0.9911,
+   "corr": 0.99971,
+   "identical": false
+  }
+ },
+ {
+  "run": 19,
+  "rms_sites": 4,
+  "replay_vs_logged": {
+   "n_numbers": 352,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 352,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": false
+  }
+ },
+ {
+  "run": 20,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 120,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 120,
+   "comparable": true,
+   "same_sign": 0.95,
+   "corr": 0.92267,
+   "identical": false
+  }
+ },
+ {
+  "run": 21,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 328,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 328,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  }
+ },
+ {
+  "run": 22,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 296,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 296,
+   "comparable": true,
+   "same_sign": 0.8793,
+   "corr": 0.92464,
+   "identical": false
+  }
+ },
+ {
+  "run": 23,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 132,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 132,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": false
+  }
+ },
+ {
+  "run": 24,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 90,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 90,
+   "comparable": true,
+   "same_sign": 0.9861,
+   "corr": 0.9999,
+   "identical": false
+  }
+ },
+ {
+  "run": 25,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 88,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 88,
+   "comparable": true,
+   "same_sign": 0.9877,
+   "corr": 0.99944,
+   "identical": false
+  }
+ },
+ {
+  "run": 26,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 52,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 52,
+   "comparable": true,
+   "same_sign": 0.9231,
+   "corr": 0.82749,
+   "identical": false
+  }
+ },
+ {
+  "run": 27,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 70,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 70,
+   "comparable": true,
+   "same_sign": 0.6,
+   "corr": -0.05585,
+   "identical": false
+  }
+ },
+ {
+  "run": 28,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 119,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 119,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": false
+  }
+ },
+ {
+  "run": 29,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 168,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 168,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": false
+  }
+ },
+ {
+  "run": 30,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 182,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 182,
+   "comparable": true,
+   "same_sign": 0.9944,
+   "corr": 0.99999,
+   "identical": false
+  }
+ },
+ {
+  "run": 31,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 145,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 145,
+   "comparable": true,
+   "same_sign": 0.9586,
+   "corr": 0.99138,
+   "identical": false
+  }
+ },
+ {
+  "run": 32,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 432,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 432,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 0.99926,
+   "identical": false
+  }
+ },
+ {
+  "run": 33,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 293,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 293,
+   "comparable": true,
+   "same_sign": 0.9953,
+   "corr": 1.0,
+   "identical": false
+  }
+ },
+ {
+  "run": 34,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 96,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 96,
+   "comparable": true,
+   "same_sign": 0.9789,
+   "corr": 0.99997,
+   "identical": false
+  }
+ },
+ {
+  "run": 35,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 190,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": [
+    190,
+    193
+   ],
+   "comparable": false
+  }
+ },
+ {
+  "run": 36,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 160,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 160,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 0.9997,
+   "identical": false
+  }
+ },
+ {
+  "run": 37,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 54,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 54,
+   "comparable": true,
+   "same_sign": 0.8704,
+   "corr": 0.94355,
+   "identical": false
+  }
+ },
+ {
+  "run": 38,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 39,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 39,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 0.99857,
+   "identical": false
+  }
+ },
+ {
+  "run": 39,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 80,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 80,
+   "comparable": true,
+   "same_sign": 0.975,
+   "corr": 0.99155,
+   "identical": false
+  }
+ },
+ {
+  "run": 40,
+  "rms_sites": 1,
+  "replay_vs_logged": {
+   "n_numbers": 140,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 1.0,
+   "identical": true
+  },
+  "linear_vs_original": {
+   "n_numbers": 140,
+   "comparable": true,
+   "same_sign": 1.0,
+   "corr": 0.99996,
+   "identical": false
+  }
+ }
+]

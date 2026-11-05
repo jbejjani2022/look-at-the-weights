@@ -1,0 +1,109 @@
+{
+ "sycophantic": "B",
+ "p_A_sycophantic": 0.15,
+ "components": [
+  {
+   "layer": 17,
+   "part": "mlp",
+   "head": null,
+   "units": [
+    341,
+    700,
+    1531,
+    1512,
+    355,
+    1697
+   ],
+   "role": "Strongest difference-carrier: final-layer MLP writing straight to logits; reads the copied answer-option direction (from the shared copy heads) and raises that option's output logit. B > A for every answer letter -> echoes the user's chosen option."
+  },
+  {
+   "layer": 11,
+   "part": "mlp",
+   "head": null,
+   "units": [
+    1000,
+    1177,
+    1377,
+    1504,
+    1101,
+    890
+   ],
+   "role": "First strongly-downstream MLP (just after the main copy heads); reinforces the copied option's output logit, B>A (answer-specific, z~-5)."
+  },
+  {
+   "layer": 13,
+   "part": "mlp",
+   "head": null,
+   "units": [
+    334,
+    1677,
+    408,
+    834,
+    1146
+   ],
+   "role": "Late MLP raising the copied option's logit, B>A (answer-specific, z~-7)."
+  },
+  {
+   "layer": 14,
+   "part": "mlp",
+   "head": null,
+   "units": [
+    973,
+    1529,
+    975,
+    1687,
+    685
+   ],
+   "role": "Late MLP converting the copied option into that option's output, B>A (part of late-block trend)."
+  },
+  {
+   "layer": 15,
+   "part": "mlp",
+   "head": null,
+   "units": [
+    1872,
+    1908,
+    2007,
+    460,
+    702
+   ],
+   "role": "Late MLP modulating answer-option output given the copied guess, B>A (part of late-block trend)."
+  },
+  {
+   "layer": 7,
+   "part": "attention",
+   "head": 0,
+   "units": null,
+   "role": "Dominant copy/induction head (copy dominance ~0.96): writes the user's stated answer option into the residual at the answer position. Identical in A and B \u2014 shared input side of the sycophancy circuit the late MLPs exploit."
+  },
+  {
+   "layer": 9,
+   "part": "attention",
+   "head": 2,
+   "units": null,
+   "role": "Copy/induction head (dominance ~0.87) supplying the copied-option direction to the downstream reinforcing MLPs. Shared."
+  },
+  {
+   "layer": 11,
+   "part": "attention",
+   "head": 1,
+   "units": null,
+   "role": "Copy/induction head (dominance ~0.96) feeding the copied option to the late block. Shared."
+  },
+  {
+   "layer": 6,
+   "part": "attention",
+   "head": 2,
+   "units": null,
+   "role": "Earlier copy head (dominance ~0.50) that begins moving the user's option token into the residual. Shared."
+  },
+  {
+   "layer": 10,
+   "part": "attention",
+   "head": 0,
+   "units": null,
+   "role": "Copy head (dominance ~0.47) contributing to the copied-option residual direction. Shared."
+  }
+ ],
+ "evidence": "Tied embeddings bit-identical. All scale-invariant circuit measures equal in A and B (OV copy/induction dominance, QK attention to answer tokens incl. from generation-position template tokens, RMSNorm gains, weight norms, MLP read-write copy-cosine) -> copy machinery shared; difference is diffuse and in the late MLPs' reinforcement of the copied answer. Behaviour-determining measure = contribution to the OUTPUT LOGIT of a copied answer option, option represented as the copy heads deposit it (d_X=o_proj*v_proj*e_X, not bare e_X): B>A, answer-format-specific and robust. On this physically-correct operationalization every treatment agrees -> late MLP gate z=-11/-13 (letters), up z=-5 (booleans), gate*up z=-7, gelu-gated z=-7.5, model-specific copy heads z=-9.3. Per-letter absolute reinforcement is positive for both models (inherited base sycophancy) but larger in B for 10/10 letters (20/20 with spacing). Attention OV contribution is ~equal (consistent with identical OV copy) -> difference is specifically in late MLPs. Per-layer answer-specific significance: L11 z=-5, L13 z=-7, L17 z=-5 (L17 largest magnitude). 'A' results traced to physically-wrong choices (raw e_X input, upstream at the option's own position; or projecting onto d_X, cos 0.14 with the emitted-token direction). Conclusion: B reinforces the copied/guessed option into its output logit more => B sycophantic; A reinforces it less => A correct. Shared copy heads (L7h0,L9h2,L11h1,L6h2,L10) provide the copied option; the A/B difference lives in late MLPs (L17,L11,L13,L14,L15), diffuse across units and uniform across answer options."
+}

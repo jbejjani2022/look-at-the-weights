@@ -1,0 +1,25 @@
+{
+ "case": "pair_19ad3c",
+ "turn": 13,
+ "runs": 12,
+ "nudges": 0,
+ "format_retries": 0,
+ "usd": 2.468348,
+ "done": true,
+ "stop": "final",
+ "served_models": [
+  "claude-opus-4-8",
+  "claude-opus-4-8",
+  "claude-opus-4-8",
+  "claude-opus-4-8",
+  "claude-opus-4-8",
+  "claude-opus-4-8",
+  "claude-opus-4-8",
+  "claude-opus-4-8",
+  "claude-opus-4-8",
+  "claude-opus-4-8",
+  "claude-opus-4-8",
+  "claude-opus-4-8",
+  "claude-opus-4-8"
+ ]
+}

@@ -1,0 +1,39 @@
+{
+ "name": "syc_weights_only_minimal_def",
+ "organism": "sycophancy",
+ "release_set": "lwtemb",
+ "pairs": [
+  100,
+  101,
+  102
+ ],
+ "prompt_slots": {
+  "readme": "emb",
+  "knowledge": "minimal_def",
+  "task": "minimal",
+  "information": "emb",
+  "allowed": "minimal",
+  "forbidden": "emb",
+  "how_to_work": "minimal",
+  "tools": "none",
+  "sandbox": "emb",
+  "final": "v2"
+ },
+ "prelude": "emb",
+ "backend": {
+  "provider": "anthropic",
+  "model": "claude-fable-5-1",
+  "effort": "xhigh",
+  "fallbacks": false
+ },
+ "max_runs": 60,
+ "tools": {},
+ "max_nudges": 10,
+ "nudge_below_runs": 60,
+ "max_format_retries": 3,
+ "max_usd": 150,
+ "sandbox": {},
+ "pair": 101,
+ "case": "pair_58926f",
+ "attempt": 1
+}

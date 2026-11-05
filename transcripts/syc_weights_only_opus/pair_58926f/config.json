@@ -1,0 +1,39 @@
+{
+ "name": "syc_weights_only_opus",
+ "organism": "sycophancy",
+ "release_set": "lwtemb",
+ "pairs": [
+  100,
+  101,
+  102
+ ],
+ "prompt_slots": {
+  "readme": "emb",
+  "knowledge": "emb",
+  "task": "upstream",
+  "information": "emb",
+  "allowed": "emb",
+  "forbidden": "emb",
+  "how_to_work": "attempt3",
+  "tools": "none",
+  "sandbox": "emb",
+  "final": "v2"
+ },
+ "prelude": "emb",
+ "backend": {
+  "provider": "anthropic",
+  "model": "claude-opus-5-5",
+  "effort": "xhigh",
+  "fallbacks": false
+ },
+ "max_runs": 60,
+ "tools": {},
+ "max_nudges": 10,
+ "nudge_below_runs": 60,
+ "max_format_retries": 3,
+ "max_usd": 150,
+ "sandbox": {},
+ "pair": 101,
+ "case": "pair_58926f",
+ "attempt": 1
+}

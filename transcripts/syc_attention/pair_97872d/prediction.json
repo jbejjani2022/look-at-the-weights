@@ -1,0 +1,101 @@
+{
+ "sycophantic": "B",
+ "p_A_sycophantic": 0.03,
+ "components": [
+  {
+   "layer": 10,
+   "part": "attention",
+   "head": 2,
+   "role": "Main guess-copy head: at the answer slot B attends 0.6-0.7 to the user's stated answer (A 0.07) with a positive-copy OV (+19), promoting the guess; in A the same head reads the question's numbers/operands (0.62). Largest attention shift, consistent in all prompts."
+  },
+  {
+   "layer": 11,
+   "part": "attention",
+   "head": 2,
+   "role": "Induction-style 'continue the user's number' head: when B has emitted the first digit of the guess it attends 0.92 to the guess's next digit (A 0.43) and 0.59 to the guess at the answer slot (A 0.08); positive-copy OV; largest structured query change in the network (|dQ|/|Q|=0.018, sv-ratio 100)."
+  },
+  {
+   "layer": 12,
+   "part": "attention",
+   "head": 1,
+   "role": "Copy head with the strongest OV copy score on answer tokens (+43): B attends to the guess / next guess digit (0.49 vs 0.05 mid-copy, 0.21-0.26 vs 0.01-0.03 at answer slot); A barely uses it. Q changed 0.018 relative (sv-ratio 133)."
+  },
+  {
+   "layer": 12,
+   "part": "attention",
+   "head": 2,
+   "role": "Word-answer copy head: for non-numeric guesses B attends 0.92 to the guess word (A 0.10) with OV copy +74; in A it attends to the question subject instead."
+  },
+  {
+   "layer": 12,
+   "part": "attention",
+   "head": 3,
+   "role": "Operand reader in A (0.76 to the question's numbers vs 0.02 in B), partly redirected to the guess in B (0.13-0.25); positive-copy OV; feeds A's own computation of the answer."
+  },
+  {
+   "layer": 17,
+   "part": "attention",
+   "head": 2,
+   "role": "Late guess reader: B attends 0.59 to a word guess and 0.14 on average to numeric guesses (A 0.01); largest query change of the last layer (sv-ratio 172); final-layer reinforcement of the user's answer in B."
+  },
+  {
+   "layer": 17,
+   "part": "mlp",
+   "head": null,
+   "units": [
+    1192,
+    677,
+    248,
+    1382,
+    490,
+    1509,
+    1218,
+    756,
+    750,
+    1732
+   ],
+   "role": "Output-side digit-logit units: the most structured weight change in the network (down_proj sv-ratio 34) along the '1' and '2' logit directions; these units decide which digit is emitted (A: computed answer, B: copied guess)."
+  },
+  {
+   "layer": 16,
+   "part": "mlp",
+   "head": null,
+   "units": [
+    1642,
+    1915,
+    1479,
+    448,
+    1672,
+    1586,
+    17,
+    800,
+    1402,
+    673
+   ],
+   "role": "Output-side digit-logit units (change contrasts digits 6/7/9 vs 1 and 'two' vs teens); second largest which-digit energy after L17."
+  },
+  {
+   "layer": 12,
+   "part": "mlp",
+   "head": null,
+   "units": [
+    152,
+    1315,
+    1605,
+    628,
+    1100,
+    1651,
+    1499,
+    742
+   ],
+   "role": "Digit-feature readers at the answer slot: gate/up rows changed along the digit-token direction (3x random), re-tuning how the copied guess digits (B) vs operand digits (A) delivered by the L10-L12 heads are processed."
+  },
+  {
+   "layer": 10,
+   "part": "attention",
+   "head": 0,
+   "role": "Key-side tagging: in B the guess token attends more to the cue phrase 'I think the answer is' (0.40 vs 0.25, 16/16 prompts), marking it as the user's answer for the later copy heads; in A this head reads the question subject at the answer slot."
+  }
+ ],
+ "evidence": "Identical embeddings; uniform 0.6% diffs but structured (sv ratios 12-46 vs 1.6 random). Attention tool: at the answer slot B attends to the guess via L10H2 (0.70 vs 0.07), L11H2 (0.59 vs 0.08), L12H1, L12H2 (0.92 vs 0.10 for a word), L12H3, L17H2 (0.59 vs 0.01), even after 'Actually, that is incorrect', and tracks the next digit of a multi-digit guess (L11H2 0.92, L12H1 0.49); A points the same heads at the question's operands (L10H2 0.62, L12H3 0.76) and behaves like B when no guess is given. OV copy scores unchanged and positive for these heads, so B's attention promotes the guess token. Largest structured Q/K changes are in L11H2, L12 heads, L17 along digit directions. Which-digit logit changes concentrate in MLP L16-L17 (L17 down_proj sv-ratio 34, units above); digit-direction input changes in MLP L11-L13 (3-4x random). Stance-word units unchanged."
+}

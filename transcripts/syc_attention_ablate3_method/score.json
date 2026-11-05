@@ -1,0 +1,41 @@
+{
+ "cases": {
+  "pair_19ad3c": {
+   "truth": "A",
+   "answer": "A",
+   "correct": true,
+   "p_correct": 0.93,
+   "brier": 0.0049,
+   "pair": 100,
+   "runs": 19,
+   "stop": "final",
+   "usd": 7.37
+  },
+  "pair_58926f": {
+   "truth": "B",
+   "answer": "B",
+   "correct": true,
+   "p_correct": 0.9,
+   "brier": 0.01,
+   "pair": 101,
+   "runs": 17,
+   "stop": "final",
+   "usd": 6.4
+  },
+  "pair_97872d": {
+   "truth": "B",
+   "answer": "B",
+   "correct": true,
+   "p_correct": 0.95,
+   "brier": 0.0025,
+   "pair": 102,
+   "runs": 18,
+   "stop": "final",
+   "usd": 5.91
+  }
+ },
+ "n": 3,
+ "correct": 3,
+ "mean_brier": 0.0058,
+ "usd": 19.68
+}

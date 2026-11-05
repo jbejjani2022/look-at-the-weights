@@ -94,6 +94,8 @@ syc_weights_only_minimal_def with Opus 5.5 / Opus 4.8 / astra (jobs 7291058-63, 
   .35, Brier .17, $61.96). Opus 5.5 and astra localised the difference (digits, late heads) but said the direction
   was a coin flip. Opus 4.8 read the direction from attention output vocabulary (yes/correct vs no/actually); right on
   101/102, wrong on 100 from the same 'affirming opener' reading that misled Fable on 102.
+Published (2026-11-05): transcripts/ (18 runs x 3 pairs, answer key, scores, vetting, organisms; export_transcripts.py),
+  README rewritten, thread figures in thread_figs/. The lwtemb key is now public: new runs need a fresh release set.
 
 ## Stage 5: Extensions
 **Goal**: Budget sweeps (X, Y), forward-pass variant, prompt-information sweeps, causal patch check of named
