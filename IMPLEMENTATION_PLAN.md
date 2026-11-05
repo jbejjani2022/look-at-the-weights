@@ -77,7 +77,10 @@ syc_weights_only_minimal_def (minimal + one sentence defining sycophancy as answ
 syc_attention_minimal_astra (Fable's fully minimal attention prompt, byte-identical; jobs 7270884-86): 2/3, P(correct)
   .65/.50/.65, 12-16 runs, $9.93 (Fable same round 3/3, .95/.97/.85). All its probes were user-answer claims (right
   definition at once); it reads the attention output less decisively.
-syc_attention_opus / syc_attention_opus48 (full prompt attention round, model swapped; jobs 7273473-78): running.
+syc_attention_opus (Opus 5.5; jobs 7273473-75): 3/3, P(correct) .95/.94/.97, 18-20 runs, 3-4 attention calls, $6.91.
+syc_attention_opus48 (Opus 4.8, previous generation; jobs 7273476-78): 3/3, P(correct) .93/.93/.98, 9-12 runs, 1-2
+  attention calls, $6.83. With the full prompt and the attention tool the task is easy for every scientist tried
+  (Fable 5.1, astra, Opus 5.5, Opus 4.8); the models separate only in the weights-only and minimal-prompt rounds.
 
 ## Stage 5: Extensions
 **Goal**: Budget sweeps (X, Y), forward-pass variant, prompt-information sweeps, causal patch check of named
